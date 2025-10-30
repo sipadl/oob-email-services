@@ -12,12 +12,12 @@ public class MainJob {
     @Autowired
     private MainController mainController;
 
-    @Scheduled(cron = "#{@environment.getProperty('job.mandiri','* */15 * * * *')}")
+    @Scheduled(cron = "#{@environment.getProperty('job.mandiri','0 0 */1 * * *')}")
     public void mainJob11Malem () {
         mainController.checkUserValid();
     }
 
-    @Scheduled(cron = "#{@environment.getProperty('job.reminder','* * 22 * * *')}")
+    @Scheduled(cron = "#{@environment.getProperty('job.reminder','0 0 22 * * *')}")
     public void mainJobCisoMandiri() throws Exception {
         mainController.readExcel();
     }

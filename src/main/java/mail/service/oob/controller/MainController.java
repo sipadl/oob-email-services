@@ -54,5 +54,6 @@ public class MainController {
        data.forEach(items -> {
            passwordServices.updateUserOneByOne((String) items.get("identity"));
        });
+       excelServices.renameExcelAfterProcess();
     }
 }
