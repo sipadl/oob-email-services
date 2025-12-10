@@ -54,5 +54,7 @@ public class MainController {
        data.forEach(items -> {
            passwordServices.updateUserOneByOne((String) items.get("identity"));
        });
+
+        System.out.println("process data by cisso : "+ data.size());
     }
 }

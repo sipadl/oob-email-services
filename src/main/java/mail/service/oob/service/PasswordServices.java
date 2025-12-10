@@ -121,6 +121,7 @@ public class PasswordServices extends Helper {
     public void updateUserOneByOne(String email) {
         try {
             UserLoginInfo values = userRepository.findByEmail(email);
+            System.out.println(values);
             if(values == null ) {
                 throw new RuntimeException("Email Not Found");
             }
@@ -141,16 +142,6 @@ public class PasswordServices extends Helper {
             String body = Helper.templateActivation(values.getNamaPemilikUsaha(), nomerHandphone, tempPassword, urlUbahPassword);
             emailServices.sendSimpleEmail(values.getEmailPemilikUsaha(), "Perubahan Password Livin Usaha", body);
             userRepository.updatePasswordUser(tempPassword, values.getId());
-
-            // loging email
-//            LogEmailModels logging = new LogEmailModels();
-//            logging.setLogStatus("200");
-//            logging.setId(new Date().getTime());
-//            logging.setLogUser(values.getEmailPemilikUsaha());
-//            logging.setLogTujuan(values.getNamaPemilikUsaha());
-//            logging.setLogTglWaktu(new Timestamp(System.currentTimeMillis()));
-//            logging.setLogSubject(body);
-//            logEmailRepo.save(logging);
 
         } catch (Exception e) {
             throw new RuntimeException(e);

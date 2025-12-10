@@ -58,8 +58,8 @@ public interface UserRepository extends JpaRepository <UserModel, Long> {
 
     @Transactional
     @Modifying
-    @Query(value = "UPDATE USER_OOB_TABLE_AUTH_DTL a SET LAST_LOGIN = LOCALTIMESTAMP, IS_FIRST_LOGIN = 1, IS_REMINDER = NULL" +
-            "PASSWORD = ?1, WRONG_PASSWORD_COUNT = 0, IS_LOCKED = 0" +
+    @Query(value = "UPDATE USER_OOB_TABLE_AUTH_DTL a SET LAST_LOGIN = LOCALTIMESTAMP, IS_FIRST_LOGIN = 1, IS_REMINDER = NULL, " +
+            "PASSWORD = ?1, WRONG_PASSWORD_COUNT = 0, IS_LOCKED = 0 " +
             "WHERE a.ID_USER_OOB = ?2", nativeQuery = true)
     void updatePasswordUser(String password, Long id);
 
