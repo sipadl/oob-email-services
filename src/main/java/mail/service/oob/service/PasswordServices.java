@@ -100,7 +100,6 @@ public class PasswordServices extends Helper {
                 linkChangePassDto.setDate(new SimpleDateFormat("ddMMyyyyHHmmss").format(new Date()));
                 String secretKey = getSaltString(4).replace("-", "").toUpperCase();
                 String encResult = EncryptDataFiller.encrypt(new Gson().toJson(linkChangePassDto), secretKey);
-
                 String randomNumb = String.valueOf(ThreadLocalRandom.current().nextInt(1000, 10000 +1));
                 String codeEncode = values.getId() + "|" + randomNumb;
                 String secureToken = Base64.getEncoder().encodeToString(codeEncode.getBytes());
@@ -111,6 +110,7 @@ public class PasswordServices extends Helper {
                 String body = Helper.templateActivation(values.getNamaPemilikUsaha(), nomerHandphone, tempPassword, urlUbahPassword);
                 emailServices.sendSimpleEmail(values.getEmailPemilikUsaha(), "Perubahan Password Livin Usaha", body);
                 userRepository.updatePasswordUser(tempPassword, values.getId());
+                userRepository.updateStatusById("-2", values.getId());
             }
             ;
         } catch (Exception e) {
@@ -120,8 +120,12 @@ public class PasswordServices extends Helper {
 
     public void updateUserOneByOne(String email) {
         try {
+<<<<<<< HEAD
             UserLoginInfo values = userRepository.findByEmail(email);
             System.out.println(values);
+=======
+            UserLoginInfo values = userRepository.findOneByEmail(email);
+>>>>>>> 669fac641581d57a8e0595334726588fd0cac92a
             if(values == null ) {
                 throw new RuntimeException("Email Not Found");
             }
